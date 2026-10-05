@@ -1,631 +1,188 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<title>TACHANKA TECH - Auckland Repairs</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tachanka Tech – Auckland Laptop &amp; Console Repairs</title>
+<meta name="description" content="Small Auckland repair shop. Laptops, Xbox, PlayStation, OS changes from $10, repairs $50 cash. E-waste taken too.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-
-body {
-    background:#000033;
-    color:white;
-    font-family:"Comic Sans MS", Arial;
-    margin:0;
-    overflow-x:hidden;
+:root{
+  --red:#c8201e; --red-d:#8f1514; --bone:#efe6d2; --steel:#1a1c1e; --hazard:#f2b705; --ink:#1a1c1e;
+  --bg:#efe6d2; --fg:#1a1c1e; --panel:#e4d9c0; --line:#1a1c1e;
+  --display:"Russo One","Arial Black",Impact,sans-serif;
+  --body:"Archivo","Helvetica Neue",Arial,sans-serif;
 }
-
-
-/* STAR BACKGROUND */
-
-body:before {
-
-content:"";
-
-position:fixed;
-
-width:200%;
-height:200%;
-
-background-image:
-radial-gradient(white 2px, transparent 2px),
-radial-gradient(cyan 1px, transparent 1px),
-radial-gradient(yellow 1px, transparent 1px);
-
-background-size:
-80px 80px,
-130px 130px,
-200px 200px;
-
-animation:space 30s linear infinite;
-
-opacity:.5;
-
-z-index:-1;
-
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#1a1c1e;--fg:#efe6d2;--panel:#25282b;--line:#efe6d2}
 }
+:root[data-theme="dark"]{--bg:#1a1c1e;--fg:#efe6d2;--panel:#25282b;--line:#efe6d2}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:18px;line-height:1.55;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--hazard);outline-offset:3px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
 
+/* ticker */
+.ticker{background:var(--hazard);color:#1a1c1e;font-family:var(--display);font-size:15px;overflow:hidden;white-space:nowrap;border-bottom:4px solid #1a1c1e}
+.ticker div{display:inline-block;padding:9px 0;animation:tick 28s linear infinite}
+.ticker span{margin:0 28px}
+@keyframes tick{to{transform:translateX(-50%)}}
 
+/* hero */
+.hero{position:relative;background:var(--red);color:var(--bone);overflow:hidden;border-bottom:8px solid #1a1c1e}
+.hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent 0 38px,rgba(0,0,0,.09) 38px 76px)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:center;padding-top:64px;padding-bottom:64px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(52px,10vw,112px);line-height:.92;margin:0;letter-spacing:-.01em;text-shadow:6px 6px 0 #1a1c1e}
+h1 em{display:block;font-style:normal;color:var(--hazard)}
+.hero p{font-size:21px;max-width:30ch;margin:24px 0 28px;font-weight:600}
+.btn{display:inline-block;background:var(--hazard);color:#1a1c1e;font-family:var(--display);font-size:20px;padding:14px 28px;text-decoration:none;border:3px solid #1a1c1e;box-shadow:6px 6px 0 #1a1c1e;transition:transform .15s,box-shadow .15s;cursor:pointer}
+.btn:hover{transform:translate(3px,3px);box-shadow:3px 3px 0 #1a1c1e}
+.portrait{position:relative;justify-self:center;transform:rotate(3deg)}
+.portrait img{display:block;width:min(340px,80vw);aspect-ratio:1;object-fit:cover;background:#1a1c1e;border:6px solid var(--bone);box-shadow:12px 12px 0 #1a1c1e}
+.stamp{position:absolute;right:-18px;bottom:-22px;background:var(--bone);color:var(--red-d);border:4px solid var(--red-d);font-family:var(--display);padding:6px 16px;font-size:22px;transform:rotate(-9deg);text-align:center;line-height:1.1}
+.stamp small{display:block;font-size:13px}
 
-@keyframes space {
+/* hero load sequence (the one motion moment) */
+.hero h1,.hero p,.hero .btn,.portrait{animation:slam .7s cubic-bezier(.2,1.4,.4,1) both}
+.hero p{animation-delay:.15s}.hero .btn{animation-delay:.3s}.portrait{animation-delay:.2s}
+@keyframes slam{from{opacity:0;transform:translateY(30px) scale(.94)}}
 
-from {
-transform:translate(0,0);
+section{padding:72px 0}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(32px,5vw,52px);margin:0 0 32px;line-height:1}
+
+/* services as ruled work list */
+.list{border-top:4px solid var(--line)}
+.row{display:grid;grid-template-columns:80px 1fr 1.2fr;gap:20px;align-items:center;padding:22px 0;border-bottom:2px solid var(--line);transition:background .2s,padding .2s}
+.row:hover{background:var(--panel);padding-left:14px}
+.row .ico{font-size:44px;line-height:1}
+.row h3{font-family:var(--display);font-weight:400;font-size:28px;margin:0}
+.row p{margin:0;opacity:.85}
+
+/* prices */
+.prices{background:#1a1c1e;color:var(--bone)}
+.prices .wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.price{border:4px solid var(--hazard);padding:32px;position:relative}
+.price b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(64px,10vw,104px);line-height:1;color:var(--hazard)}
+.price span{font-size:20px;font-weight:600}
+.price i{display:block;margin-top:10px;font-style:normal;opacity:.8}
+.price.red{border-color:var(--red);}
+.price.red b{color:#ff5a4f}
+
+.ewaste{margin-top:28px;grid-column:1/-1;background:var(--hazard);color:#1a1c1e;padding:18px 24px;font-weight:800;border:4px solid #1a1c1e;font-size:20px}
+
+/* where */
+.where{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.where p{margin:0 0 16px;max-width:46ch}
+.tag{display:inline-block;border:3px solid var(--line);padding:4px 14px;font-weight:800;margin:0 8px 8px 0}
+
+/* work order form */
+.order{background:var(--panel);border:4px solid var(--line);padding:36px;box-shadow:10px 10px 0 var(--red);max-width:760px}
+label{display:block;font-weight:800;margin:0 0 6px}
+input,textarea{width:100%;font:inherit;color:var(--fg);background:var(--bg);border:3px solid var(--line);padding:12px 14px;margin-bottom:22px;border-radius:0}
+input:focus,textarea:focus{border-color:var(--red);outline:3px solid var(--hazard)}
+textarea{resize:vertical;min-height:140px}
+.order .btn{width:100%;font-size:22px}
+
+footer{background:#1a1c1e;color:var(--bone);padding:40px 0;border-top:8px solid var(--red)}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+footer a{color:var(--hazard);font-weight:800}
+footer .brand{font-family:var(--display);font-size:22px}
+
+@media (max-width:800px){
+  .hero .wrap,.where,.prices .wrap{grid-template-columns:1fr}
+  .row{grid-template-columns:56px 1fr}
+  .row p{grid-column:2}
+  .hero .wrap{padding-top:44px;padding-bottom:56px}
+  .order{padding:24px}
 }
-
-to {
-transform:translate(-300px,-500px);
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
 }
-
-}
-
-
-
-
-
-.topbar {
-
-background:red;
-color:yellow;
-
-font-size:22px;
-
-border-bottom:5px ridge yellow;
-
-}
-
-
-
-
-
-.header {
-
-text-align:center;
-
-background:linear-gradient(90deg,black,purple,black);
-
-padding:25px;
-
-border:8px groove cyan;
-
-}
-
-
-
-
-
-h1 {
-
-font-size:55px;
-
-color:lime;
-
-text-shadow:5px 5px blue;
-
-animation:glow 1s infinite alternate;
-
-}
-
-
-
-@keyframes glow {
-
-from {
-text-shadow:0 0 5px cyan;
-}
-
-to {
-text-shadow:0 0 30px yellow;
-}
-
-}
-
-
-
-
-
-.container {
-
-width:90%;
-
-margin:auto;
-
-}
-
-
-
-
-
-.box {
-
-background:rgba(0,0,0,.85);
-
-border:7px ridge silver;
-
-margin:25px;
-
-padding:25px;
-
-box-shadow:0 0 20px blue;
-
-text-align:center;
-
-}
-
-
-
-
-
-.tachanka {
-
-width:300px;
-
-border:8px groove yellow;
-
-}
-
-
-
-
-
-.services {
-
-display:flex;
-
-justify-content:center;
-
-flex-wrap:wrap;
-
-}
-
-
-
-
-
-.card {
-
-background:#111;
-
-border:5px outset purple;
-
-margin:10px;
-
-padding:20px;
-
-width:220px;
-
-transition:.3s;
-
-}
-
-
-
-
-
-.card:hover {
-
-transform:scale(1.1);
-
-background:purple;
-
-}
-
-
-
-
-
-.bigprice {
-
-font-size:35px;
-
-color:yellow;
-
-}
-
-
-
-
-
-input, textarea {
-
-width:80%;
-
-padding:10px;
-
-font-family:"Comic Sans MS";
-
-font-size:16px;
-
-border:3px ridge cyan;
-
-}
-
-
-
-
-
-.submit {
-
-width:auto;
-
-background:yellow;
-
-border:5px outset white;
-
-padding:12px;
-
-font-size:20px;
-
-font-family:"Comic Sans MS";
-
-cursor:pointer;
-
-}
-
-
-
-
-
-.submit:hover {
-
-background:lime;
-
-}
-
-
-
-
-
-a {
-
-color:cyan;
-
-font-size:20px;
-
-}
-
-
-
-
-
-.footer {
-
-background:black;
-
-color:lime;
-
-text-align:center;
-
-padding:20px;
-
-border-top:5px ridge red;
-
-}
-
-
-
 </style>
-
 </head>
-
-
-
-
 <body>
 
-
-
-<div class="topbar">
-
-<marquee>
-
-🔥 $10 OPERATING SYSTEM CHANGE 🔥 | LAPTOP REPAIRS | PLAYSTATION | XBOX | AUCKLAND ONLY | WE TAKE E-WASTE TOO! 🔥
-
-</marquee>
-
+<div class="ticker" aria-hidden="true">
+  <div>
+    <span>$10 operating system change</span><span>Laptop repairs</span><span>PlayStation</span><span>Xbox</span><span>Auckland only</span><span>E-waste taken too</span>
+    <span>$10 operating system change</span><span>Laptop repairs</span><span>PlayStation</span><span>Xbox</span><span>Auckland only</span><span>E-waste taken too</span>
+  </div>
 </div>
 
-
-
-
-<div class="header">
-
-<h1>
-⚙ TACHANKA TECH ⚙
-</h1>
-
-<h2>
-Auckland Laptop + Console Repairs
-</h2>
-
-</div>
-
-
-
-
-
-
-<div class="container">
-
-
-
-
-
-<div class="box">
-
-
-<img class="tachanka" src="tachanka.jpg">
-
-
-<h2>
-THE OFFICIAL TACHANKA TECH WEBSITE
-</h2>
-
-
-<p>
-
-Broken laptop?
-Console problems?
-
-<br><br>
-
-If we can fix it:
-
-</p>
-
-
-<div class="bigprice">
-
-ONLY $50 (cash only)
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="box">
-
-
-<h2>
-🔧 WHAT WE FIX
-</h2>
-
-
-
-<div class="services">
-
-
-<div class="card">
-
-💻
-
-<h3>Laptops</h3>
-
-Slow PCs
-<br>
-Software issues
-<br>
-Upgrades
-
-</div>
-
-
-
-
-<div class="card">
-
-🎮
-
-<h3>Consoles</h3>
-
-Xbox
-<br>
-PlayStation
-<br>
-Gaming problems
-
-</div>
-
-
-
-
-
-<div class="card">
-
-💿
-
-<h3>Software</h3>
-
-Windows/Linux help
-<br>
-OS changes
-<br>
-$10 installs
-
-</div>
-
-
-
-
-
-
-<div class="card">
-
-⚡
-
-<h3>Other Tech</h3>
-
-Random problems
-<br>
-Repair attempts
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="box">
-
-
-<h2>
-📍 LOCATION
-</h2>
-
-
-<p>
-
-LOCAL AUCKLAND ONLY
-
-<br><br>
-
-Small repair service.
-Fair prices.
-No huge company stuff.
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="box">
-
-
-<h2>
-📧 REPAIR REQUEST
-</h2>
-
-
-
-<form action="https://formspree.io/f/mjgqroqd" method="POST">
-
-
-
-Name:
-
-<br>
-
-<input type="text" name="name" required>
-
-
-<br><br>
-
-
-
-Email:
-
-<br>
-
-<input type="email" name="email" required>
-
-
-<br><br>
-
-
-
-What needs fixing:
-
-<br>
-
-<textarea name="message" rows="6" required></textarea>
-
-
-<br><br>
-
-
-<input class="submit" type="submit" value="SEND REPAIR REQUEST">
-
-
-</form>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="box">
-
-
-<h2>
-CONTACT
-</h2>
-
-
-<p>
-
-Email:
-
-<br>
-
-<a href="mailto:25338@students.mrgs.school.nz">
-
-25338@students.mrgs.school.nz
-
-</a>
-
-
-</p>
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-<div class="footer">
-
-
-TACHANKA TECH © 2026
-
-<br>
-
-More to come...
-
-
-</div>
-
-
-
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Tachanka<em>Tech</em></h1>
+      <p>Broken laptop? Console playing up? If we can fix it, it's $50.</p>
+      <a class="btn" href="#request">Send a repair request</a>
+    </div>
+    <div class="portrait">
+      <img src="tachanka.jpg" alt="Tachanka, the Tachanka Tech mascot" onerror="this.style.display='none'">
+      <div class="stamp">$50<small>cash only</small></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="fix">
+  <div class="wrap">
+    <h2>What we fix</h2>
+    <div class="list">
+      <div class="row"><div class="ico" aria-hidden="true">💻</div><h3>Laptops</h3><p>Slow PCs, software issues and upgrades.</p></div>
+      <div class="row"><div class="ico" aria-hidden="true">🎮</div><h3>Consoles</h3><p>Xbox, PlayStation and gaming problems.</p></div>
+      <div class="row"><div class="ico" aria-hidden="true">💿</div><h3>Software</h3><p>Windows and Linux help, OS changes and $10 installs.</p></div>
+      <div class="row"><div class="ico" aria-hidden="true">⚡</div><h3>Other tech</h3><p>Random problems. We'll give the repair a go.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="prices" id="prices">
+  <div class="wrap">
+    <div class="price"><b>$10</b><span>Operating system change</span><i>Windows or Linux install.</i></div>
+    <div class="price red"><b>$50</b><span>Repair, if we can fix it</span><i>Cash only.</i></div>
+    <div class="ewaste">♻ Got dead tech lying around? We take e-waste too.</div>
+  </div>
+</section>
+
+<section id="where">
+  <div class="wrap where">
+    <div>
+      <h2>Local Auckland only</h2>
+    </div>
+    <div>
+      <p>A small repair service with fair prices. No huge company stuff.</p>
+      <span class="tag">Auckland</span><span class="tag">Fair prices</span><span class="tag">Cash only</span>
+    </div>
+  </div>
+</section>
+
+<section id="request" style="padding-top:0">
+  <div class="wrap">
+    <h2>Repair request</h2>
+    <form class="order" action="https://formspree.io/f/mjgqroqd" method="POST">
+      <label for="name">Name</label>
+      <input id="name" type="text" name="name" autocomplete="name" required>
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" autocomplete="email" required>
+      <label for="message">What needs fixing?</label>
+      <textarea id="message" name="message" rows="6" placeholder="Tell us the device and what it's doing." required></textarea>
+      <button class="btn" type="submit">Send repair request</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><div class="brand">Tachanka Tech © 2026</div>More to come...</div>
+    <div>Email <a href="mailto:25338@students.mrgs.school.nz">25338@students.mrgs.school.nz</a></div>
+  </div>
+</footer>
 
 </body>
-
 </html>
